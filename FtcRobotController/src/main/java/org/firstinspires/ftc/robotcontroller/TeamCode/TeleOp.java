@@ -1,27 +1,46 @@
 package org.firstinspires.ftc.robotcontroller.TeamCode;
 
+import android.util.Log;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name="Pompeii: Teleop Tank", group="Pompeii")
 public class TeleOp extends OpMode {
     // TeleOp
-    private MotorController leftMotors;
-    private MotorController rightMotors;
-
+    MotorController motor;
     // Initialization code that happens TeleOp starts
     @Override
     public void init() {
-        leftMotors = new MotorController(hardwareMap);
-        leftMotors.add(MotorNames.BACK_LEFT_DRIVE);
-        leftMotors.add(MotorNames.FRONT_LEFT_DRIVE);
-        rightMotors = new MotorController(hardwareMap);
-        rightMotors.add(MotorNames.BACK_RIGHT_DRIVE);
-        rightMotors.add(MotorNames.FRONT_RIGHT_DRIVE);
+        motor = new MotorController(hardwareMap, false, 100);
+        motor.add("motor");
     }
-    
+
     @Override
     public void loop() {
-        leftMotors.setPower(gamepad1.left_stick_y);
-        rightMotors.setPower(gamepad1.right_stick_y);
+
+        motor.toggleOnButtonStateChange(gamepad1.x);
     }
 }
+//              \═─←¬__
+//               \     \
+//                |     |
+//             ___|     |___
+//            (__-╝_____╚-__)
+//               |   • •  |
+//               | |▄▄▄| |
+//              _\_|   |_/_
+//         ____|\__╘,,,╛__/|____
+//        / ---┌───|   |───┐---\
+//      //     | Campbells |    \\
+//     //      |           |    \\
+//    //       |-__▄███▄__-|    \\
+//   ╘-╛       |   ▀███▀   |    ╘-╛
+//             |           |
+//             |    SOUP   |
+//             ╚-_________-╝
+//              | |     | |
+//              | |     | |
+//              | |     | |
+//             _| |     | |_
+//            ╘-==╛     ╘=-╛

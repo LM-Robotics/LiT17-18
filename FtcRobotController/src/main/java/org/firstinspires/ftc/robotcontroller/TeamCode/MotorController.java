@@ -9,12 +9,14 @@ public class MotorController {
 
     private ArrayList<DcMotor> motors = new ArrayList<>();
     private HardwareMap hardwareMap;
-    private boolean motorState = true;
+    private boolean motorState;
     private boolean buttonState = false;
-    private double power = 0;
+    private double power;
 
-    MotorController(HardwareMap hardwareMap) {
+    MotorController(HardwareMap hardwareMap, boolean motorState, double power) {
         this.hardwareMap = hardwareMap;
+        this.motorState = motorState;
+        this.power = power;
     }
 
     // Add motor to MotorController
