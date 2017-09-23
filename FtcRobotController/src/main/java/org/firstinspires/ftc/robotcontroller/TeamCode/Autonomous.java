@@ -5,11 +5,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name="Pompeii: Autonomous", group="Pompeii")
 public class Autonomous extends LinearOpMode {
 
-    private Navigation nav;
+    //private Navigation nav;
 
     @Override
     public void runOpMode() throws InterruptedException {
-        nav = new Navigation(hardwareMap);
+        //nav = new Navigation(hardwareMap);
 
         waitForStart();
 

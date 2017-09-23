@@ -34,10 +34,8 @@ package org.firstinspires.ftc.robotcontroller.internal;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpModeRegister;
 
-import org.firstinspires.ftc.robotcontroller.TeamCode.Autonomous;
-import org.firstinspires.ftc.robotcontroller.TeamCode.TeleOp;
-import org.firstinspires.ftc.robotcontroller.TeamCode.Test;
-import org.firstinspires.ftc.robotcontroller.external.samples.BasicOpMode_Linear;
+//import org.firstinspires.ftc.robotcontroller.TeamCode.TeleOp;
+import org.firstinspires.ftc.robotcontroller.TeamCode.TestDrive;
 import org.firstinspires.ftc.robotcontroller.external.samples.ConceptNullOp;
 import org.firstinspires.ftc.robotcontroller.TeamCode.ConceptVuMarkIdentification;
 
@@ -72,8 +70,7 @@ public class FtcOpModeRegister implements OpModeRegister {
         /**
          * Any manual OpMode class registrations should go here.
          */
-        manager.register("Name", Autonomous.class);
-        manager.register("TeleOp", TeleOp.class);
+        manager.register("TeleOp", TestDrive.class);
         manager.register("Vision", ConceptVuMarkIdentification.class);
 
     }

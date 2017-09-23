@@ -7,41 +7,36 @@ import java.util.ArrayList;
 
 public class MotorController {
 
-    private ArrayList<DcMotor> motors = new ArrayList<>();
-    private HardwareMap hardwareMap;
+    private DcMotor motor;
     private boolean motorState;
     private boolean buttonState = false;
     private double power;
 
-    MotorController(HardwareMap hardwareMap, boolean motorState, double power) {
-        this.hardwareMap = hardwareMap;
+    MotorController(String motorName, HardwareMap hardwareMap, boolean motorState, double power) {
         this.motorState = motorState;
         this.power = power;
-    }
-
-    // Add motor to MotorController
-    void add(String motorName) {
-        motors.add(hardwareMap.dcMotor.get(motorName));
+        motor = hardwareMap.dcMotor.get(motorName);
     }
 
     // Sets power of all the motors
     void setPower(double power) {
-        if (Math.abs(power) > 5) {
+        if (Math.abs(power) > 0.05) {
             this.power = power;
             if (motorState) {
-                for (DcMotor motor : motors) {
-                    motor.setPower(power);
-                }
+                turnOn();
+            } else {
+                turnOff();
             }
         }
     }
 
     // Toggles the motor state
-    public void toggle() {
-        if (motorState)
+    private void toggle() {
+        if (motorState) {
             turnOff();
-        else
+        } else {
             turnOn();
+        }
         motorState = !motorState;
     }
 
@@ -54,15 +49,11 @@ public class MotorController {
     }
 
     void turnOn() {
-        for (DcMotor motor : motors) {
-            motor.setPower(power);
-        }
+        motor.setPower(power);
     }
 
 
     void turnOff() {
-        for (DcMotor motor : motors) {
-            motor.setPower(0);
-        }
+        motor.setPower(0);
     }
 }

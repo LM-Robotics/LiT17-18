@@ -8,9 +8,9 @@ package org.firstinspires.ftc.robotcontroller.TeamCode;
 class MotorNames {
 
     static String
-            FRONT_LEFT_DRIVE = "frontLeftDriveMotor",
-            BACK_LEFT_DRIVE = "backLeftDriveMotor",
-            FRONT_RIGHT_DRIVE = "frontRightDriveMotor",
-            BACK_RIGHT_DRIVE = "backRightDriveMotor";
+            FRONT_LEFT_DRIVE = "frontLeftMotor",
+            BACK_LEFT_DRIVE = "backLeftMotor",
+            FRONT_RIGHT_DRIVE = "frontRightMotor",
+            BACK_RIGHT_DRIVE = "backRightMotor";
 
 }

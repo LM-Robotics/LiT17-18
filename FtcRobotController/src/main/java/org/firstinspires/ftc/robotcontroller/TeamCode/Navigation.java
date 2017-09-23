@@ -13,56 +13,86 @@ public class Navigation {
     // This is the power of the drive motors
     private static final double POWER = 100;
 
-    private MotorController leftMotors;
-    private MotorController rightMotors;
+    private double xPos;
+    private double yPos;
+    private double rotation;
 
-    Navigation(HardwareMap hardWareMap) {
-        leftMotors = new MotorController(hardWareMap, false, POWER);
-        leftMotors.add(MotorNames.BACK_LEFT_DRIVE);
-        leftMotors.add(MotorNames.FRONT_LEFT_DRIVE);
-        rightMotors = new MotorController(hardWareMap, false, POWER);
-        rightMotors.add(MotorNames.BACK_RIGHT_DRIVE);
-        rightMotors.add(MotorNames.FRONT_RIGHT_DRIVE);
+    private MotorController leftFrontMotor;
+    private MotorController leftBackMotor;
+    private MotorController rightFrontMotor;
+    private MotorController rightBackMotor;
+
+    Navigation(HardwareMap hardWareMap, double x, double y, double angle) {
+        leftFrontMotor = new MotorController(MotorNames.FRONT_LEFT_DRIVE, hardWareMap, false, POWER);
+        leftBackMotor = new MotorController(MotorNames.FRONT_LEFT_DRIVE, hardWareMap, false, POWER);
+        rightFrontMotor = new MotorController(MotorNames.FRONT_RIGHT_DRIVE, hardWareMap, false, POWER);
+        rightBackMotor = new MotorController(MotorNames.FRONT_RIGHT_DRIVE, hardWareMap, false, POWER);
+        xPos = x;
+        yPos = y;
+        rotation = angle;
     }
 
-    void driveForward(double distance) throws InterruptedException {
-        turnOn(true, true);
+    void drive(double distance, boolean forward) throws InterruptedException {
+        if (forward)
+            turnOn(true, true);
+        else
+            turnOn(false, false);
         Thread.sleep((long) (distance / SPEED));
         turnOff();
     }
 
-    void driveBackwards(double distance) throws InterruptedException {
-        turnOn(false, false);
-        Thread.sleep((long) (distance / SPEED));
+    void turn(double angle, boolean clockWise) throws InterruptedException {
+        if (clockWise)
+            turnOn(true, false);
+        else
+            turnOn(false, true);
+        Thread.sleep((long) (angle / TURN_SPEED));
         turnOff();
     }
 
-    void turnRight(double angle) throws InterruptedException {
-        turnOn(true, false);
-        Thread.sleep((long)(angle / TURN_SPEED));
-        turnOff();
-    }
-
-    void turnLeft(double angle) throws InterruptedException {
-        turnOn(false, true);
-        Thread.sleep((long)(angle / TURN_SPEED));
-        turnOff();
-    }
 
     void turnOn(boolean leftForward, boolean rightForward) {
-        if(leftForward)
-            leftMotors.setPower(POWER);
-        else
-            leftMotors.setPower(-POWER);
-        if(rightForward)
-            rightMotors.setPower(POWER);
-        else
-            rightMotors.setPower(-POWER);
+        if (leftForward) {
+            leftFrontMotor.setPower(POWER);
+            leftBackMotor.setPower(POWER);
+        } else {
+            leftFrontMotor.setPower(-POWER);
+            leftBackMotor.setPower(-POWER);
+        }
+        if (rightForward) {
+            rightFrontMotor.setPower(POWER);
+            rightBackMotor.setPower(POWER);
+        } else {
+            rightFrontMotor.setPower(-POWER);
+            rightBackMotor.setPower(-POWER);
+        }
     }
 
     void turnOff() {
-        leftMotors.setPower(0);
-        rightMotors.setPower(0);
+        leftBackMotor.setPower(0);
+        leftFrontMotor.setPower(0);
+        rightBackMotor.setPower(0);
+        rightFrontMotor.setPower(0);
     }
 
+    void moveToPoint(double x, double y) throws InterruptedException {
+        double dx = xPos - x;
+        double dy = yPos - y;
+        double distance = Math.sqrt(dx * dx + dy * dy);
+        if(dx > 0) {
+            if(dy > 0) {
+
+            } else {
+
+            }
+        } else {
+            if(dy > 0) {
+
+            } else {
+
+            }
+        }
+        double angle = 5;
+        drive(distance, true);
+    }
 }
