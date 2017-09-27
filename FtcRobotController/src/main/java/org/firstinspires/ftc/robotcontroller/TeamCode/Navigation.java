@@ -13,16 +13,16 @@ public class Navigation {
     // This is the power of the drive motors
     private static final double POWER = 100;
 
-    private double xPos;
-    private double yPos;
-    private double rotation;
+    static private double xPos;
+    static private double yPos;
+    static private double rotation;
 
-    private MotorController leftFrontMotor;
-    private MotorController leftBackMotor;
-    private MotorController rightFrontMotor;
-    private MotorController rightBackMotor;
+    static private MotorController leftFrontMotor;
+    static private MotorController leftBackMotor;
+    static private MotorController rightFrontMotor;
+    static private MotorController rightBackMotor;
 
-    Navigation(HardwareMap hardWareMap, double x, double y, double angle) {
+    static void setNav(HardwareMap hardWareMap, double x, double y, double angle) {
         leftFrontMotor = new MotorController(MotorNames.FRONT_LEFT_DRIVE, hardWareMap, false, POWER);
         leftBackMotor = new MotorController(MotorNames.FRONT_LEFT_DRIVE, hardWareMap, false, POWER);
         rightFrontMotor = new MotorController(MotorNames.FRONT_RIGHT_DRIVE, hardWareMap, false, POWER);
@@ -32,7 +32,7 @@ public class Navigation {
         rotation = angle;
     }
 
-    void drive(double distance, boolean forward) throws InterruptedException {
+    static void drive(double distance, boolean forward) throws InterruptedException {
         if (forward)
             turnOn(true, true);
         else
@@ -41,7 +41,7 @@ public class Navigation {
         turnOff();
     }
 
-    void turn(double angle, boolean clockWise) throws InterruptedException {
+    static void turn(double angle, boolean clockWise) throws InterruptedException {
         if (clockWise)
             turnOn(true, false);
         else
@@ -51,7 +51,7 @@ public class Navigation {
     }
 
 
-    void turnOn(boolean leftForward, boolean rightForward) {
+    static void turnOn(boolean leftForward, boolean rightForward) {
         if (leftForward) {
             leftFrontMotor.setPower(POWER);
             leftBackMotor.setPower(POWER);
@@ -68,14 +68,14 @@ public class Navigation {
         }
     }
 
-    void turnOff() {
+    static void turnOff() {
         leftBackMotor.setPower(0);
         leftFrontMotor.setPower(0);
         rightBackMotor.setPower(0);
         rightFrontMotor.setPower(0);
     }
 
-    void moveToPoint(double x, double y) throws InterruptedException {
+    static void moveToPoint(double x, double y) throws InterruptedException {
         double dx = xPos - x;
         double dy = yPos - y;
         double distance = Math.sqrt(dx * dx + dy * dy);

@@ -74,10 +74,6 @@ public class ConceptVuMarkIdentification extends LinearOpMode {
 
     OpenGLMatrix lastLocation = null;
 
-    /**
-     * {@link #vuforia} is the variable we will use to store our instance of the Vuforia
-     * localization engine.
-     */
     VuforiaLocalizer vuforia;
 
     @Override public void runOpMode() {
@@ -92,18 +88,6 @@ public class ConceptVuMarkIdentification extends LinearOpMode {
         // OR...  Do Not Activate the Camera Monitor View, to save power
         // VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
-        /*
-         * IMPORTANT: You need to obtain your own license key to use Vuforia. The string below with which
-         * 'parameters.vuforiaLicenseKey' is initialized is for illustration only, and will not function.
-         * A Vuforia 'Development' license key, can be obtained free of charge from the Vuforia developer
-         * web site at https://developer.vuforia.com/license-manager.
-         *
-         * Vuforia license keys are always 380 characters long, and look as if they contain mostly
-         * random data. As an example, here is a example of a fragment of a valid key:
-         *      ... yIgIzTqZ4mWjk9wd3cZO9T1axEqzuhxoGlfOOI2dRzKS4T0hQ8kT ...
-         * Once you've obtained a license key, copy the string from the Vuforia web site
-         * and paste it in to your code onthe next line, between the double quotes.
-         */
         parameters.vuforiaLicenseKey = "AULANuj/////AAAAGXP1rGuspEfwmNTiYB89npgWAI6tNF/zt/+SirGvZoaHr/poHkRud0Pk2TPOXzH6tgtsCwUng6pGd9p7lfep/x6hTM7ypOfxXrWRaoe4sPUdqCcbi2uYNhpGpAIFrVo8dIQhOUV8k0qC92aUSCamX+kNBy/bI7ZVDICcl8xMuZsdVGlOn/VoBLIiuI1m3Mwn17vL02hvaydJpLJ5XYy61FPAE8rybDygjaQTRN6+te6USLSw8hWJErPRQPYLsWFxTLxAXhPFvqxuOXQq8U/glopqV7+SZ2zv0lCdwH1mOcl7YzTLGdBVebYfn1psHnniIChBQNDBTBTo4sKgwQGSoI6DkrTDjvZzEXJ06YmOF0Em";
 
         /*
@@ -124,8 +108,6 @@ public class ConceptVuMarkIdentification extends LinearOpMode {
         VuforiaTrackable relicTemplate = relicTrackables.get(0);
         relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
 
-        telemetry.addData(">", "Press Play to start");
-        telemetry.update();
         waitForStart();
 
         relicTrackables.activate();
